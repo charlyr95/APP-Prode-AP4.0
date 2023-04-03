@@ -1,0 +1,65 @@
+ronda;fecha;hs;equipo 1;equipo 2;goles equipo 1;goles equipo 2;penales equipo 1;penales equipo 2
+1;2022-11-20;13:00;catar;ecuador;0;2;null;null
+1;2022-11-21;10:00;inglaterra;iran;6;2;null;null
+1;2022-11-21;13:00;senegal;paises bajos;0;2;null;null
+1;2022-11-21;16:00;estados unidos;gales;1;1;null;null
+1;2022-11-22;07:00;argentina;arabia saudi;1;2;null;null
+1;2022-11-22;10:00;dinamarca;tunez;0;0;null;null
+1;2022-11-22;13:00;mexico;polonia;0;0;null;null
+1;2022-11-22;16:00;francia;australia;4;1;null;null
+1;2022-11-23;07:00;marruecos;croacia;0;0;null;null
+1;2022-11-23;10:00;alemania;japon;1;2;null;null
+1;2022-11-23;13:00;españa;costa rica;7;0;null;null
+1;2022-11-23;16:00;belgica;canada;1;0;null;null
+1;2022-11-24;07:00;suiza;camerun;1;0;null;null
+1;2022-11-24;10:00;uruguay;republica de corea;0;0;null;null
+1;2022-11-24;13:00;portugal;ghana;3;2;null;null
+1;2022-11-24;16:00;brasil;serbia;2;0;null;null
+2;2022-11-25;07:00;gales;iran;0;2;null;null
+2;2022-11-25;10:00;catar;senegal;1;3;null;null
+2;2022-11-25;13:00;paises bajos;ecuador;1;1;null;null
+2;2022-11-25;16:00;inglaterra;estados unidos;0;0;null;null
+2;2022-11-26;07:00;tunez;australia;0;1;null;null
+2;2022-11-26;10:00;polonia;arabia saudi;2;0;null;null
+2;2022-11-26;13:00;francia;dinamarca;2;1;null;null
+2;2022-11-26;16:00;argentina;mexico;2;0;null;null
+2;2022-11-27;07:00;japon;costa rica;0;1;null;null
+2;2022-11-27;10:00;belgica;marruecos;0;2;null;null
+2;2022-11-27;13:00;croacia;canada;4;1;null;null
+2;2022-11-27;16:00;españa;alemania;1;1;null;null
+2;2022-11-28;07:00;camerun;serbia;3;3;null;null
+2;2022-11-28;10:00;republica de corea;ghana;2;3;null;null
+2;2022-11-28;13:00;brasil;suiza;1;0;null;null
+2;2022-11-28;16:00;portugal;uruguay;2;0;null;null
+3;2022-11-29;12:00;paises bajos;catar;2;0;null;null
+3;2022-11-29;12:00;ecuador;senegal;1;2;null;null
+3;2022-11-29;16:00;gales;inglaterra;0;3;null;null
+3;2022-11-29;16:00;iran;estados unidos;0;1;null;null
+3;2022-11-30;12:00;australia;dinamarca;1;0;null;null
+3;2022-11-30;12:00;tunez;francia;1;0;null;null
+3;2022-11-30;16:00;polonia;argentina;0;2;null;null
+3;2022-11-30;16:00;arabia saudi;mexico;1;2;null;null
+3;2022-12-01;12:00;croacia;belgica;0;0;null;null
+3;2022-12-01;12:00;canada;marruecos;1;2;null;null
+3;2022-12-01;16:00;japon;españa;2;1;null;null
+3;2022-12-01;16:00;costa rica;alemania;2;4;null;null
+3;2022-12-02;12:00;ghana;uruguay;0;2;null;null
+3;2022-12-02;12:00;republica de corea;portugal;2;1;null;null
+3;2022-12-02;16:00;serbia;suiza;2;3;null;null
+3;2022-12-02;16:00;camerun;brasil;1;0;null;null
+4;2022-12-03;12:00;paises bajos;estados unidos;3;1;null;null
+4;2022-12-03;16:00;argentina;australia;2;1;null;null
+4;2022-12-04;12:00;francia;polonia;3;1;null;null
+4;2022-12-04;16:00;inglaterra;senegal;3;0;null;null
+4;2022-12-05;12:00;japon;croacia;1;1;1;3
+4;2022-12-05;16:00;brasil;republica de corea;4;1;null;null
+4;2022-12-06;12:00;marruecos;españa;0;0;3;0
+4;2022-12-06;16:00;portugal;suiza;6;1;null;null
+5;2022-12-09;12:00;croacia;brasil;1;1;4;2
+5;2022-12-09;16:00;paises bajos;argentina;2;2;3;4
+5;2022-12-10;12:00;marruecos;portugal;1;0;null;null
+5;2022-12-10;16:00;inglaterra;francia;1;2;null;null
+6;2022-12-13;16:00;argentina;croacia;3;0;null;null
+6;2022-12-14;16:00;francia;marruecos;2;0;null;null
+7;2022-12-17;12:00;croacia;marruecos;2;1;null;null
+8;2022-12-18;12:00;argentina;francia;3;3;4;2
