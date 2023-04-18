@@ -3,37 +3,47 @@ package modules;
 public class Partido {
 	private Equipo equipo1;
 	private Equipo equipo2;
-	private int goles1;
-	private int goles2;
+	private int golesEquipo1;
+	private int golesEquipo2;
 
-	public Partido(Equipo equipo1, Equipo equipo2, int golesEquipo1, int golesEquipo2){
+	public Partido(Equipo equipo1, Equipo equipo2, int golesEquipo1, int golesEquipo2) {
 		this.equipo1 = equipo1;
 		this.equipo2 = equipo2;
-		this.goles1 = golesEquipo1;
-		this.goles2 = golesEquipo2;
+		this.golesEquipo1 = golesEquipo1;
+		this.golesEquipo2 = golesEquipo2;
 	}
 
-	public void resultado(Equipo equipo) {
-		if (equipo == this.equipo1) {
-			if (this.goles1 > this.goles2) {
-				System.out.print(equipo.getNombre() + " ganador");
-			} else if (this.goles1 == this.goles2) {
-				System.out.print("empate");
+	public ResultadoEnum resultado(Equipo equipo) {
+		String str = equipo.getNombre();
+		String str1 = this.equipo1.getNombre();
+		String str2 = this.equipo2.getNombre();
+		if (str.equals(str1)) {
+			if (this.golesEquipo1 > this.golesEquipo2) {
+				return ResultadoEnum.GANADOR;
+			} else if (this.golesEquipo1 < this.golesEquipo2) {
+				return ResultadoEnum.PERDEDOR;
 			} else {
-				System.out.print(equipo.getNombre() + " perdedor");
+				return ResultadoEnum.EMPATE;
 			}
-		}
-		if (equipo == this.equipo2) {
-			if (this.goles1 < this.goles2) {
-				System.out.print(equipo.getNombre() + " ganador");
-			} else if (this.goles1 == this.goles2) {
-				System.out.print("empate");
+		} else if (str.equals(str2)) {
+			if (this.golesEquipo2 > this.golesEquipo1) {
+				return ResultadoEnum.GANADOR;
+			} else if (this.golesEquipo2 < this.golesEquipo1) {
+				return ResultadoEnum.PERDEDOR;
 			} else {
-				System.out.print(equipo.getNombre() + " perdedor");
+				return ResultadoEnum.EMPATE;
 			}
+		} else {
+			return null;
 		}
 	}
-	public void participantes() {
-		System.out.println(this.equipo1.getNombre() + " vs " + this.equipo2.getNombre());
+
+
+	public Equipo getEquipo1() {
+		return this.equipo1;
+	}
+
+	public Equipo getEquipo2() {
+		return this.equipo2;
 	}
 }
