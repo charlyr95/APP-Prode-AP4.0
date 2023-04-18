@@ -7,7 +7,6 @@ public class Main {
 	public static void main(String[] args) {
 
 		ArrayList equipos = new ArrayList<>();
-		ArrayList partidos = new ArrayList<>();
 
 
 		// PARTIDOS
@@ -15,6 +14,7 @@ public class Main {
 		contenido.nextLine(); // Omito el encabezado
 
 		// INSTANCIAR LOS PARTIDOS
+		ArrayList partidos = new ArrayList<>();
 		for (Scanner it = contenido; it.hasNext(); ) {
 			String linea = it.nextLine();
 			String[] data = linea.split(";");
@@ -22,15 +22,9 @@ public class Main {
 			Equipo equipo2 = new Equipo(data[2], "");
 			int golesEquipo1 = Integer.parseInt(data[1]);
 			int golesEquipo2 = Integer.parseInt(data[3]);
-			Partido partido = new Partido(equipo1, equipo2, golesEquipo1, golesEquipo2);
-			partidos.add(partido);
+			Partido p = new Partido(equipo1, equipo2, golesEquipo1, golesEquipo2);
+			partidos.add(p);
 		}
-
-		// VERIFICAR INSTANCIAS
-		/*for (int i = 0; i<partidos.size();i++){
-			Partido p = (Partido) partidos.get(i);
-			System.out.println(p.getEquipo1().getNombre() + " vs " + p.getEquipo2().getNombre());
-		}*/
 
 		// INSTANCIAR LOS PRONOSTICOS
 		ArrayList<Pronostico> pronosticos = new ArrayList<Pronostico>();
