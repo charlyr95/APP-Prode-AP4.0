@@ -146,7 +146,7 @@ public class Main {
 	}
 
 	public static void agregarParticipante(String nombre, ArrayList<Participante> participantes){
-		ArrayList<Pronostico> pronostico = null;
+		ArrayList<Pronostico> pronostico = new ArrayList<>();
 		Participante p = new Participante(nombre.toLowerCase(), pronostico);
 		participantes.add(p);
 	}
