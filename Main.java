@@ -7,7 +7,7 @@ public class Main {
 	public static void main(String[] args) {
 
 		// INSTANCIAR LOS EQUIPOS
-		ArrayList equipos = new ArrayList<>();
+		ArrayList<Equipo> equipos = new ArrayList<>();
 		Scanner contenido = Archivos.leer("./src/references/resultados.csv");
 		contenido.nextLine(); // Omito el encabezado
 		for (Scanner it = contenido; it.hasNext(); ) {
@@ -24,7 +24,7 @@ public class Main {
 		System.out.println(equipos.size());
 
 		// INSTANCIAR LOS PARTIDOS
-		ArrayList partidos = new ArrayList<>();
+		ArrayList<Partido> partidos = new ArrayList<>();
 		contenido = Archivos.leer("./src/references/resultados.csv");
 		contenido.nextLine(); // Omito el encabezado
 		for (Scanner it = contenido; it.hasNext(); ) {
@@ -37,6 +37,49 @@ public class Main {
 			Partido p = new Partido(equipo1, equipo2, golesEquipo1, golesEquipo2);
 			partidos.add(p);
 		}
+
+		// INSTANCIAR LOS PARTICIPANTES
+		ArrayList<Participante> pronosticos = new ArrayList<Pronostico>();
+		contenido = Archivos.leer("./src/references/pronostico.csv");
+		contenido.nextLine(); // Omito el encabezado
+
+		for (Scanner it = contenido; it.hasNext(); ) {
+			String linea = it.nextLine();
+			String[] data = linea.split(";");
+			Equipo equipo1 = buscarEquipo(data[1],equipos);
+			Equipo equipo2 = buscarEquipo(data[2],equipos);
+			Partido partido = null;
+
+			boolean ganaEquipo1 = Boolean.parseBoolean(data[2]);
+			boolean ganaEquipo2 = Boolean.parseBoolean(data[3]);
+			boolean empate = Boolean.parseBoolean(data[4]);
+			ResultadoEnum resultado;
+			if (ganaEquipo1) {
+				resultado = ResultadoEnum.GANADOR;
+			} else if (ganaEquipo2) {
+				resultado = ResultadoEnum.PERDEDOR;
+			} else {
+				resultado = ResultadoEnum.EMPATE;
+			}
+			Pronostico pronostico = new Pronostico(partido, equipo1, resultado);
+			pronosticos.add(pronostico);
+		}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 		// INSTANCIAR LOS PRONOSTICOS
 		ArrayList<Pronostico> pronosticos = new ArrayList<Pronostico>();
