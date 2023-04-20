@@ -39,7 +39,7 @@ public class Main {
 
 
 		// INSTANCIAR LOS PARTICIPANTES
-		ArrayList<Participante> participantes = new ArrayList<Participante>();
+		ArrayList<Participante> participantes = new ArrayList<>();
 		contenido = Archivos.leer("./src/references/pronostico.csv");
 		contenido.nextLine(); // Omito el encabezado
 		for (Scanner it = contenido; it.hasNext(); ) {
