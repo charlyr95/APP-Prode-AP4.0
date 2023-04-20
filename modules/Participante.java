@@ -21,6 +21,10 @@ public class Participante {
         return pronosticos;
     }
 
+    public void agregarPronostico(Pronostico pronostico){
+        this.pronosticos.add(pronostico);
+    }
+
     public int calcularTotal(){
         ArrayList<Pronostico> pronosticos = this.getPronosticos();
         int puntos = 0;
@@ -29,7 +33,7 @@ public class Participante {
         }
         return puntos;
     }
-    
+
     public int cantidadPronosticos(){
         return this.getPronosticos().size();
     }
