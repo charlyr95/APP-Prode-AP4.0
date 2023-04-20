@@ -1,25 +1,25 @@
 participante;equipo1;equipo2;gana1;gana2;empate
 carlos;argentina;arabia saudita;true;false;false
 carlos;polonia;mexico;false;false;true
-carlos
-carlos
-carlos	
-carlos
-carlos	
-carlos
-carlos	
-carlos
-carlos	
-carlos
-damian
-damian
-damian
-damian
-damian
-damian
-damian
-damian
-damian
-damian
-damian
-damian
+carlos;brasil;japon;true;false;false
+carlos;spain;alemania;false;false;true
+carlos;argentina;polonia;true;false;false
+carlos;mexico;arabia saudita;true;false;false
+carlos;brasil;alemania;false;true;false
+carlos;spain;japon;true;false;false
+carlos;argentina;mexico;true;false;false
+carlos;polonia;arabia saudita;true;false;false
+carlos;brasil;spain;false;false;true
+carlos;alemania;japon;true;false;false
+damian;argentina;arabia saudita;true;false;false
+damian;polonia;mexico;false;true;false
+damian;brasil;japon;true;false;false
+damian;spain;alemania;true;false;false
+damian;argentina;polonia;true;false;false
+damian;mexico;arabia saudita;true;false;false
+damian;brasil;alemania;false;true;false
+damian;spain;japon;true;false;false
+damian;argentina;mexico;true;false;false
+damian;polonia;arabia saudita;false;true;false
+damian;brasil;spain;true;false;false
+damian;alemania;japon;false;true;false
