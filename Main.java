@@ -10,6 +10,7 @@ public class Main {
 		ArrayList<Equipo> equipos = new ArrayList<>();
 		Scanner contenido = Archivos.leer("./src/references/resultados.csv");
 		contenido.nextLine(); // Omito el encabezado
+		try{
 		for (Scanner it = contenido; it.hasNext(); ) {
 			String linea = it.nextLine();
 			String[] data = linea.split(";");
@@ -20,12 +21,16 @@ public class Main {
 				agregarEquipo(data[3], equipos);
 			}
 		}
+		}catch(Exception e){
+			System.out.println("ocurrió un error. Revisa los valores e intentalo de nuevo.");
+		}
 
 
 		// INSTANCIAR LOS PARTIDOS
 		ArrayList<Partido> partidos = new ArrayList<>();
 		contenido = Archivos.leer("./src/references/resultados.csv");
 		contenido.nextLine(); // Omito el encabezado
+		try{
 		for (Scanner it = contenido; it.hasNext(); ) {
 			String linea = it.nextLine();
 			String[] data = linea.split(";");
@@ -36,6 +41,8 @@ public class Main {
 			Partido p = new Partido(equipo1, equipo2, golesEquipo1, golesEquipo2);
 			partidos.add(p);
 		}
+		}catch(Exception e){
+		System.out.println("ocurrió un error. Revisa los valores e intentalo de nuevo.");}
 
 
 		// INSTANCIAR LOS PARTICIPANTES
