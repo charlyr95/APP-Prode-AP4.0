@@ -16,16 +16,21 @@ public class Main {
                 int id = rs.getInt("partido_id");
                 String equipo1 = rs.getString("team1");
                 String equipo2 = rs.getString("team2");
+                String stage = rs.getString("stage");
                 int goles1 = rs.getInt("goals1");
                 int goles2 = rs.getInt("goals2");
-                if (verificarEquipo(equipo1, equipos))
+                if (verificarEquipo(equipo1, equipos)) {
                     agregarEquipo(equipo1, equipos);
-                if (verificarEquipo(equipo2, equipos))
+                }
+                if (verificarEquipo(equipo2, equipos)) {
                     agregarEquipo(equipo2, equipos);
+                }
                 Equipo e1 = buscarEquipo(equipo1,equipos);
                 Equipo e2 = buscarEquipo(equipo2,equipos);
-                Partido p = new Partido(e1, e2, goles1, goles2);
-                partidos.add(p);
+                if (stage.equals("group")) {
+                    Partido p = new Partido(e1, e2, goles1, goles2);
+                    partidos.add(p);
+                }
             }
             rs.close();
         } catch(Exception e) {
