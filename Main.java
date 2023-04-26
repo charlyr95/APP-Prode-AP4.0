@@ -1,3 +1,16 @@
+/*
+
+    Trabajo Práctico Integrador
+    Curso Java - Argentina Programa 4.0
+
+    Participantes:
+    Cinthia Huertas
+    Damian Tristan
+    Claudio Aragonez
+    Carlos Romero
+
+ */
+
 import modules.*;
 import java.util.*;
 import java.sql.*;
