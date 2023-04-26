@@ -1,95 +1,104 @@
 import modules.*;
 import java.util.*;
 import java.sql.*;
+import java.io.*;
 
 
 public class Main {
 
     public static void main(String[] args) {
-
-        // LEER TABLA DE PARTIDOS E INSTANCIAR EQUIPOS Y PARTIDOS
-        ResultSet rs = conectarDB( "dataset_mundial_2022", "root", "admin", "partidos");
-        ArrayList<Equipo> equipos = new ArrayList<>();
-        ArrayList<Partido> partidos = new ArrayList<>();
+        // LECTURA ARCHIVO CONFIG
+        String configFile = "./src/config.ini"; // Ubicación del archivo INI
+        Properties props = new Properties();
         try {
-            while (rs.next()) {
-                int id = rs.getInt("partido_id");
-                String equipo1 = rs.getString("team1");
-                String equipo2 = rs.getString("team2");
-                String stage = rs.getString("stage");
-                int goles1 = rs.getInt("goals1");
-                int goles2 = rs.getInt("goals2");
-                if (verificarEquipo(equipo1, equipos)) {
-                    agregarEquipo(equipo1, equipos);
+            // Cargo las propiedades del archivo ini en variables
+            props.load(new FileReader(configFile));
+            String dbName = props.getProperty("databaseName");
+            String dbTabla1 = props.getProperty("tablaPartidos");
+            String dbTabla2 = props.getProperty("tablaPronosticos");
+
+            // LEER TABLA DE PARTIDOS E INSTANCIAR EQUIPOS Y PARTIDOS
+            ResultSet rs = conectarDB( dbName, "root", "admin", dbTabla1);
+            ArrayList<Equipo> equipos = new ArrayList<>();
+            ArrayList<Partido> partidos = new ArrayList<>();
+            try {
+                while (rs.next()) {
+                    // Lectura MySQL
+                    int id = rs.getInt("partido_id");
+                    String equipo1 = rs.getString("team1");
+                    String equipo2 = rs.getString("team2");
+                    String stage = rs.getString("stage");
+                    int goles1 = rs.getInt("goals1");
+                    int goles2 = rs.getInt("goals2");
+                    // Instanciar equipos
+                    if (verificarEquipo(equipo1, equipos)) {
+                        agregarEquipo(equipo1, equipos);
+                    }
+                    if (verificarEquipo(equipo2, equipos)) {
+                        agregarEquipo(equipo2, equipos);
+                    }
+                    // Instanciar partidos
+                    Equipo e1 = buscarEquipo(equipo1,equipos);
+                    Equipo e2 = buscarEquipo(equipo2,equipos);
+                    if (stage.equals("group")) { // Solo leo los partidos de fase de grupos, las eliminatorias no van.
+                        Partido p = new Partido(e1, e2, goles1, goles2);
+                        partidos.add(p);
+                    }
                 }
-                if (verificarEquipo(equipo2, equipos)) {
-                    agregarEquipo(equipo2, equipos);
+                rs.close();
+            } catch(Exception e) {
+                System.out.println("Error al cargar base de datos.");
+            };
+
+
+            // LEER TABLA DE PRONOSTICOS E INSTANCIAR PARTICIPANTES Y PRONOSTICOS
+            ResultSet rs1 = conectarDB( dbName, "root", "admin", dbTabla2);
+            ArrayList<Participante> participantes = new ArrayList<>();
+            ArrayList<Pronostico> pronosticos = new ArrayList<>();
+            try {
+                while (rs1.next()) {
+                    // Lectura de MySQL
+                    int id = rs1.getInt("pronostico_id");
+                    String participante = rs1.getString("participante");
+                    String equipo1 = rs1.getString("equipo1");
+                    String equipo2 = rs1.getString("equipo2");
+                    boolean ganaEquipo1 = rs1.getBoolean("gana1");
+                    boolean ganaEquipo2 = rs1.getBoolean("gana2");
+                    boolean empate = rs1.getBoolean("empate");
+                    // Comparación de pronóstico
+                    ResultadoEnum resultado;
+                    if (ganaEquipo1) {
+                        resultado = ResultadoEnum.GANADOR;
+                    } else if (ganaEquipo2) {
+                        resultado = ResultadoEnum.PERDEDOR;
+                    } else {
+                        resultado = ResultadoEnum.EMPATE;
+                    };
+                    // Instanciar participante
+                    if (verificarParticipante(participante, participantes)) {
+                        agregarParticipante(participante, participantes);
+                    };
+                    // Instanciar pronóstico
+                    Equipo e1 = buscarEquipo(equipo1,equipos);
+                    Equipo e2 = buscarEquipo(equipo2,equipos);
+                    Partido partido = buscarPartido(e1,e2,partidos);
+                    Pronostico pronostico = new Pronostico(partido, e1, resultado);
+                    pronosticos.add(pronostico);
+                    Participante p = buscarParticipante(participante,participantes);
+                    p.agregarPronostico(pronostico);
                 }
-                Equipo e1 = buscarEquipo(equipo1,equipos);
-                Equipo e2 = buscarEquipo(equipo2,equipos);
-                if (stage.equals("group")) {
-                    Partido p = new Partido(e1, e2, goles1, goles2);
-                    partidos.add(p);
-                }
+                rs1.close();
+            } catch(Exception e) {
+                System.out.println("Error al cargar base de datos.");
+            };
+
+
+            // CALCULAR PUNTAJE
+            for(Participante p : participantes){
+                System.out.println("El participante " + capitalize(p.getNombre()) + " tiene " + p.calcularTotal() + " puntos");
             }
-            rs.close();
-        } catch(Exception e) {
-            System.out.println("Error al cargar base de datos.");
-        };
-
-
-        // INSTANCIAR LOS PARTICIPANTES
-        ArrayList<Participante> participantes = new ArrayList<>();
-        Scanner contenido = Archivos.leer("./src/references/pronostico.csv");
-        contenido.nextLine(); // Omito el encabezado
-        try {
-            for (Scanner it = contenido; it.hasNext(); ) {
-                String linea = it.nextLine();
-                String[] data = linea.split(";");
-                if (verificarParticipante(data[0], participantes)) {
-                    agregarParticipante(data[0], participantes);
-                }
-            }
-        } catch (Exception e){
-            System.out.println("Ocurrió un error al cargar los participantes. Revisa los valores e inténtalo de nuevo.");
-        }
-
-
-        // INSTANCIAR LOS PRONOSTICOS
-        ArrayList<Pronostico> pronosticos = new ArrayList<Pronostico>();
-        contenido = Archivos.leer("./src/references/pronostico.csv");
-        contenido.nextLine(); // Omito el encabezado
-        try {
-            for (Scanner it = contenido; it.hasNext(); ) {
-                String linea = it.nextLine();
-                String[] data = linea.split(";");
-                Equipo equipo1 = buscarEquipo(data[1],equipos);
-                Equipo equipo2 = buscarEquipo(data[2],equipos);
-                Partido partido = buscarPartido(equipo1,equipo2,partidos);
-                boolean ganaEquipo1 = Boolean.parseBoolean(data[2]);
-                boolean ganaEquipo2 = Boolean.parseBoolean(data[3]);
-                boolean empate = Boolean.parseBoolean(data[4]);
-                ResultadoEnum resultado;
-                if (ganaEquipo1) {
-                    resultado = ResultadoEnum.GANADOR;
-                } else if (ganaEquipo2) {
-                    resultado = ResultadoEnum.PERDEDOR;
-                } else {
-                    resultado = ResultadoEnum.EMPATE;
-                }
-                Pronostico pronostico = new Pronostico(partido, equipo1, resultado);
-                pronosticos.add(pronostico);
-                Participante participante = buscarParticipante(data[0],participantes);
-                participante.agregarPronostico(pronostico);
-            }
-        } catch (Exception e){
-            System.out.println("Ocurrió un error al cargar los pronósticos. Revisa los valores e inténtalo de nuevo.");
-        }
-
-
-        // CALCULAR PUNTAJE
-        for(Participante p : participantes){
-            System.out.println("El participante " + capitalize(p.getNombre()) + " tiene " + p.calcularTotal() + " puntos");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
